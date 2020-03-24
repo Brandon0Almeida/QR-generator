@@ -69,3 +69,48 @@ header label:hover {
 }
 
 /*====================================================================FIN===========================================================================================*/
+
+/*CUERPO1*/
+
+.cuerpo1 {
+    background: cornflowerblue;
+    border-right: white solid 1px;
+    padding: 3px;
+    width: 95%;
+    max-width: 600px;
+    margin-left: 55%;
+    margin-top: 3%;
+    border-radius: 15px;
+}
+
+.liv {
+    text-align: center;
+}
+
+h2 {
+    background: white;
+    font-size: 39px;
+}
+
+.generarEnvioCompleto{
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+}
+
+.recepcion {
+    padding: 0 30px;
+}
+
+.despacho {
+    padding: 0 30px;
+}
+
+.btn-Igresar {
+    padding: 0 30px;
+}
+
+input {
+    border: 1px solid black;
+    margin-bottom: 5px;
+    padding: 10px 15px;
+}

@@ -15,14 +15,41 @@
             <label for="btn-menu"><img src="../images/btn-menu.png" alt="boton de desplegar menu"></label>
             <nav class="menu">
                 <ul>
-                    <li><a href="">Inicion</a></li>
+                    <li><a href="">Inicio</a></li>
                     <li><a href="">Cerrar sesion</a></li>
                     <li><a href="">Generador QR</a></li>
                     <li><a href="">Listado Paqueteria</a></li>
                 </ul>
             </nav>
         </header>
-
+        <div class="cuerpo1">
+            <form class="generarEnvioCompleto">
+                <div class="recepcion">
+                    <label class="liv"><h2>ENTRADA</h2></label>
+                    <input type="text" name="nombre_completo_remitente" placeholder="Nombre completo remitente" required>
+                    <input type="text" name="direccionR" placeholder="direccion" required>
+                    <input type="text" name="dniR" placeholder="D.N.I" required>
+                    <input type="text" name="telefonoR" placeholder="Telefono de contacto" required>
+                    <input type="text" name="fechaIngreso" placeholder="Fecha de ingreso" required>
+                    <input type="text" name="hora" placeholder="Hora" required>
+                    <input type="text" name="legajoR" placeholder="Legajo del Recepcionista" required>
+                    <input type="text" name="localidadR" placeholder="Localidad" required>  
+                    <input type="text" name="provinciaR" placeholder="Provincia" required>
+                </div>
+                <div class="despacho">
+                    <label class="liv"><h2>ENTREGA</h2></label>
+                    <input type="text" name="nombre_completo_destinatario" placeholder="Nombre completo del destinatario" required>
+                    <input type="text" name="direccionE" placeholder="direccion" required>
+                    <input type="text" name="dniE" placeholder="D.N.I" required>
+                    <input type="text" name="telefonoE" placeholder="Telefono de contacto" required>
+                    <input type="text" name="localidadD" placeholder="Localidad" required>
+                    <input type="text" name="provinciaD" placeholder="Provincia" required>
+                </div>
+                <div>
+                    <input type="submit" class="btn-Igresar" value="Ingresar Envio" >
+                </div>
+            </form>
+        </div>
     </body>
         
 </html>
