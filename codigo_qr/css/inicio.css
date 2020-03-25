@@ -72,45 +72,46 @@ header label:hover {
 
 /*CUERPO1*/
 
-.cuerpo1 {
-    background: cornflowerblue;
-    border-right: white solid 1px;
-    padding: 3px;
-    width: 95%;
-    max-width: 600px;
-    margin-left: 55%;
-    margin-top: 3%;
-    border-radius: 15px;
+form {
+    margin: auto;
+    background: rgba(0,0,0,0.3);
+    padding: 10px 20px;
 }
 
-.liv {
+
+
+
+/*=================================================================================================FIN===================================================================================================*/
+
+/*CODIGO QR*/
+
+#item_txt{
+    width: 20%;
+  }
+  #generarCodigo{
+    width: 10%;
+    background-color: #5AA1E3;
+    color: #fff;
+  }
+  #descargarCodigo{
+    width: 10%;
+    background-color: #3CB371;
+    color: #fff;
+    display: none;
     text-align: center;
-}
+    border: #eee solid 2px;
+    text-decoration: none;
+  }
+  #codigoQR{
+    width: 256px;
+    height: 256px;
+    margin-top: 25px;
+    border: 2px solid #eee;
+  }
 
-h2 {
-    background: white;
-    font-size: 39px;
-}
 
-.generarEnvioCompleto{
-    background-color: rgb(255, 255, 255);
-    padding: 10px;
-}
 
-.recepcion {
-    padding: 0 30px;
-}
 
-.despacho {
-    padding: 0 30px;
-}
+  /*======================================================================================================================================*/
 
-.btn-Igresar {
-    padding: 0 30px;
-}
-
-input {
-    border: 1px solid black;
-    margin-bottom: 5px;
-    padding: 10px 15px;
-}
+  
