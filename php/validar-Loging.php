@@ -5,7 +5,7 @@ $pass=$_POST["Contrasena"];
 
 $conn = mysqli_connect("127.0.0.1", "root", "", "envios");
 
-if ($conn->connet_error){
+if ($conn->connet_error){ 
     
     die($conn->connet_error);
     
@@ -15,7 +15,7 @@ if ($conn->connet_error){
 
 
 
-$sql = "select * from empleado where usuario = '$usuario' and password = '$pass'";
+$sql = "select * from empleado where usuario = '$usuario' and contrasena = '$pass' and puesto = 'dataEntry'";
 
 $result = mysqli_query($conn, $sql);
 

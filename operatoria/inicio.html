@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pantalla inicio gestion</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="../js/inicio.js"></script>
+        <link rel="stylesheet" type="text/css" href="../css/inicio.css">
+    </head>
+    <body>
+
+
+        
+
+
+
+   
+       
+
+
+
+
+        <header>
+            <input type="checkbox" id="btn-menu">
+            <label for="btn-menu"></label>
+            <nav class="menu">
+                <ul>
+                    <li><label for="inicio">Inicio</label><input type="checkbox" id="inicio" class="opciones"></li>
+                    <li><label for="cargaenvio">Carga de envios</label><input type="checkbox" id="cargaenvio" class="opciones"></li>
+                    <li><label for="nosotros">Nosotros</label><input type="checkbox" id="nosotros" class="opciones"></li>
+                    <!--<li><label for="cargaenvio"></label>Carga de envios<input type="checkbox" id="cargaenvio"></input></li>
+                    <li><label for="cargaenvio"></label>Carga de envios<input type="checkbox" id="cargaenvio"></input></li>
+                    <li><label for="cargaenvio"></label>Carga de envios<input type="checkbox" id="cargaenvio"></input></li>-->
+                </ul>
+            </nav>
+        </header>
+        <section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="remitente" id="formenvio">            
+                <form class="F-remitente" action="../php/cargarEnvioCompleto.php" method="post">
+                    <p>Informacion del remitente</p>
+                    <input class="largedata" type="text" placeholder="D.N.I"  value="39042357" id="rdni" name="r-dni" onchange="bucarRemitente(document.getElementById('rdni').value)">
+                    <input class="largedata" type="text" placeholder="Nombre" value="Brandon" id="rnombre" name="r-nombre">
+                    <input class="largedata" type="text" placeholder="Apellido" value="Almeida" name="r-apellido">
+                    <input class="largedata" type="text" placeholder="Nro de Contacto" value="3513110088" name="r-telefono">
+                    <input class="largedata" type="email" placeholder="email*" name="r-email">
+                    <input class="largedata" type="text" placeholder="Calle" value="Psje Hilario Fernandez" name="r-calle">
+                    <input class="shortdata" type="text" placeholder="Altura*" name="r-altura">
+                    <input class="shortdata" type="text" placeholder="Dpto*" name="r-dpto">
+                    <input class="shortdata" type="text" placeholder="Piso*" name="r-piso">
+                    <input class="shortdata" type="text" placeholder="C.P." value="5000" name="r-cp">
+                    <input class="largedata" type="text" placeholder="barrio" value="Nueva Cordoba" name="r-barrio">
+                    <input class="largedata" type="text" placeholder="Localidad" value="Cordoba" name="r-localidad">
+                    <input class="largedata" type="text" placeholder="Provincia" value="Cordoba" name="r-provincia">
+                    <p>Informacion del Paquete</p>
+                    <select name="OS" name="t-sobre">
+                        <option value="sobre">Sobre</option> 
+                        <option value="paquete">Paqueteria</option> 
+                    </select>
+                    <p>Informacion del destinatario</p>
+                    <input class="largedata" type="text" placeholder="Nombre" name="d-nombre">
+                    <input class="largedata" type="text" placeholder="Apellido" name="d-apellido">
+                    <input class="largedata" type="text" placeholder="D.N.I" name="d-dni">
+                    <input class="largedata" type="text" placeholder="Nro de Contacto" name="d-telefono">
+                    <input class="largedata" type="email" placeholder="email" name="d-email">
+                    <input class="largedata" type="text" placeholder="Calle" name="d-calle">
+                    <input class="shortdata" type="text" placeholder="Altura" name="d-altura">
+                    <input class="shortdata" type="text" placeholder="Dpto" name="d-dpto">
+                    <input class="shortdata" type="text" placeholder="Piso" name="d-piso">
+                    <input class="shortdata" type="text" placeholder="Codigo postal" name="d-cp">
+                    <input class="largedata" type="text" placeholder="barrio" name="d-barrio">
+                    <input class="largedata" type="text" placeholder="Localidad" name="d-localidad">
+                    <input class="largedata" type="text" placeholder="Provincia" name="d-provincia">
+                    <input class="largedata" type="text" placeholder="Referencia" name="d-referencia">
+                    <br>
+                    <input class="largedata" type="submit" value="Siguiente">
+                    <input class="largedata" type="submit" value="Volver">
+                </form>
+            </div>
+
+        </section>
+
+        
+        <!--<form class="paquete">
+            <input id="tipoPaquete" type="text" placeholder="Sobre o paquete?">
+            <input id="recepcionista" type="text" placeholder="Nombre del recepcionista">
+            <input type="submit" value="Siguiente">
+            <input type="submit" value="Volver">
+        </form>
+        <form class="destinatario">
+            <input id="destinatario" type="text" placeholder="Nombre completo del destinatario">
+            <input id="dni" type="text" placeholder="D.N.I">
+            <input id="telefono" type="text" placeholder="Nro de Contacto">
+            <input id="calle" type="text" placeholder="Calle">
+            <input id="altura" type="text" placeholder="Altura">
+            <input id="dpto" type="text" placeholder="Dpto">
+            <input id="piso" type="text" placeholder="Piso">
+            <input id="codigo postal" type="text" placeholder="Codigo postal">
+            <input id="localidad" type="text" placeholder="Localidad">
+            <input id="provincia" type="text" placeholder="Provincia">
+            <input type="submit" value="Siguiente">
+            <input type="submit" value="Volver">
+        </form> 
+
+            
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <input id="item_txt" type="text" placeholder="Ingresa algún texto" onchange="generador()">
+        <button id="generarCodigo">Generar</button> <a href="#" id="descargarCodigo">Descargar</a>
+        <div id="codigoQR"></div>  
+
+        -->
+    </body>
+    <script>
+        /*First way to get a value
+        value = $("#txt_name").val(); 
+
+        Second way to get a value
+        value = $("#txt_name").attr('value');*/
+    
+        var qrData = document.getElementById('item_txt');     /*<--Vamos a obtener los datos desde el id de un input*/
+
+        var qrCode = new QRCode(document.getElementById('codigoQR'));
+        function generador(){
+            
+            var data = qrData.value;
+
+            window.alert(data);
+
+            qrCode.makeCode(data);
+
+        }
+    </script>
+    <script>  
+        
+        var chars = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+        var nums = [0,1,2,3,4,5,6,7,8,9];
+        
+        function idPaquete (){
+            
+            pst1 = 0;
+            pst2 = 0;
+            pst3 = 0;
+
+            if (nums < 9999999){
+                nums++;
+                var words = chars[pst1] + chars[pst2] + chars[pst3];
+                var code = words + nums;  
+            }
+
+            
+
+        };            
+
+    </script>
+</html>
