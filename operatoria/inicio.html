@@ -4,6 +4,7 @@
         <title>Pantalla inicio gestion</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+        <link rel="shortcut icon" href="../../images/favicon.png" type="image/favicon.png">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="../js/inicio.js"></script>
         <link rel="stylesheet" type="text/css" href="../css/inicio.css">
@@ -52,8 +53,8 @@
             <div class="remitente" id="formenvio">            
                 <form class="F-remitente" action="../php/cargarEnvioCompleto.php" method="post">
                     <p>Informacion del remitente</p>
-                    <input class="largedata" type="text" placeholder="D.N.I"  value="39042357" id="rdni" name="r-dni" onchange="bucarRemitente(document.getElementById('rdni').value)">
-                    <input class="largedata" type="text" placeholder="Nombre" value="Brandon" id="rnombre" name="r-nombre">
+                    <input class="largedata" type="text" placeholder="D.N.I"   id="rdni" name="r-dni">
+                    <input class="largedata" type="text" placeholder="Nombre" id="rnombre" name="r-nombre">
                     <input class="largedata" type="text" placeholder="Apellido" value="Almeida" name="r-apellido">
                     <input class="largedata" type="text" placeholder="Nro de Contacto" value="3513110088" name="r-telefono">
                     <input class="largedata" type="email" placeholder="email*" name="r-email">
@@ -142,6 +143,7 @@
 
         -->
     </body>
+    <!--
     <script>
         /*First way to get a value
         value = $("#txt_name").val(); 
@@ -184,4 +186,5 @@
         };            
 
     </script>
-</html>
+-->
+    </html>
