@@ -8,8 +8,81 @@ body {
 header {
     width: 100%;
     background-color: cornflowerblue;
-    border-top: 30px;
 }
+
+#btn-menu{
+  display: none;
+}
+
+lista {
+  display: none;
+}
+
+
+header label {
+  display: none;
+  width: 30px;
+  height: 30px;
+  padding: 10px;
+  border-right: 1px solid #fff;
+}
+
+header label:hover {
+  cursor: pointer;
+  background: rgba(0,0,0,0.3);
+}
+
+.menu ul{
+  margin: 0;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.menu li:hover{
+  background:rgba(0,0,0,0.3);
+}
+
+.menu li{
+  border-right: 1px solid #fff;
+}
+
+.menu li a{
+  display: block;
+  padding: 25px 30px;
+  color: white;
+  text-decoration: none;
+}
+
+/*@media (max-width:768px) ACTUA COMO IF DANDOLE LA CONDICION ENTRE PARENTESIS*/
+@media (max-width:768px) {
+  header label{
+    display: block;
+  }
+
+  .menu {
+    position: absolute;
+    background-color: cornflowerblue;
+    width: 70%;
+    margin-left: -70%;
+    transition: all 0.5s;
+  }
+
+  .menu ul {
+    flex-direction: column;
+  }
+
+  .menu li {
+    border-top: 1px solid #fff;
+  }
+
+  /*Cuando la clase btn menu tenga la subclase cheked en true (osea cuando este seleccionado) con el operador "~" le decimos que busque dentro la clase menu y seleccionarlo*/
+  #btn-menu:checked ~ .menu {
+    margin: 0px;
+  }
+}
+
 
 section {
 
@@ -22,26 +95,7 @@ section {
     background-color: rgb(240, 228, 175);
 }
 
-#formenvio{
-  display: block;
-}
 
-#btn-menu{
-    display: none;
-}
-
-#inicio{
-    display: none;
-}
-
-
-#cargaenvio{
-    display: none;
-}
-
-#nosotros{
-    display: none;
-}
 
 
 

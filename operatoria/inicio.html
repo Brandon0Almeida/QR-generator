@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Pantalla inicio gestion</title>
+        <title>Pantalla principal</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
         <link rel="shortcut icon" href="../../images/favicon.png" type="image/favicon.png">
@@ -10,88 +10,62 @@
         <link rel="stylesheet" type="text/css" href="../css/inicio.css">
     </head>
     <body>
-
-
-        
-
-
-
-   
-       
-
-
-
-
         <header>
             <input type="checkbox" id="btn-menu">
-            <label for="btn-menu"></label>
+            <label for="btn-menu"><img src="../images/icons8-lista-30.png"></label>
             <nav class="menu">
                 <ul>
-                    <li><label for="inicio">Inicio</label><input type="checkbox" id="inicio" class="opciones"></li>
-                    <li><label for="cargaenvio">Carga de envios</label><input type="checkbox" id="cargaenvio" class="opciones"></li>
-                    <li><label for="nosotros">Nosotros</label><input type="checkbox" id="nosotros" class="opciones"></li>
-                    <!--<li><label for="cargaenvio"></label>Carga de envios<input type="checkbox" id="cargaenvio"></input></li>
-                    <li><label for="cargaenvio"></label>Carga de envios<input type="checkbox" id="cargaenvio"></input></li>
-                    <li><label for="cargaenvio"></label>Carga de envios<input type="checkbox" id="cargaenvio"></input></li>-->
+                    <li><a id="inicio" >Inicio</a></li>
+                    <li><a id="ingreso">Ingreso de Paquetes</a></li>
+                    <li class="lista"><a>Registro</a></li>
+                    <li class="lista"><a>Ayuda</a></li>
+                    <li class="lista"><a>Contactos Utilies</a></li>
+                    <li class="lista"><a>cerrar secion</a></li>
                 </ul>
             </nav>
         </header>
         <section>
-
-
-
-
-
-
-
-
-
-
-
-
-
             <div class="remitente" id="formenvio">            
-                <form class="F-remitente" action="../php/cargarEnvioCompleto.php" method="post">
+                <form class="F-remitente">
                     <p>Informacion del remitente</p>
                     <input class="largedata" type="text" placeholder="D.N.I"   id="rdni" name="r-dni">
                     <input class="largedata" type="text" placeholder="Nombre" id="rnombre" name="r-nombre">
-                    <input class="largedata" type="text" placeholder="Apellido" value="Almeida" name="r-apellido">
-                    <input class="largedata" type="text" placeholder="Nro de Contacto" value="3513110088" name="r-telefono">
-                    <input class="largedata" type="email" placeholder="email*" name="r-email">
-                    <input class="largedata" type="text" placeholder="Calle" value="Psje Hilario Fernandez" name="r-calle">
-                    <input class="shortdata" type="text" placeholder="Altura*" name="r-altura">
-                    <input class="shortdata" type="text" placeholder="Dpto*" name="r-dpto">
-                    <input class="shortdata" type="text" placeholder="Piso*" name="r-piso">
-                    <input class="shortdata" type="text" placeholder="C.P." value="5000" name="r-cp">
-                    <input class="largedata" type="text" placeholder="barrio" value="Nueva Cordoba" name="r-barrio">
-                    <input class="largedata" type="text" placeholder="Localidad" value="Cordoba" name="r-localidad">
-                    <input class="largedata" type="text" placeholder="Provincia" value="Cordoba" name="r-provincia">
+                    <input class="largedata" type="text" placeholder="Apellido"id="rapellido" name="r-apellido">
+                    <input class="largedata" type="text" placeholder="Nro de Contacto" id="rtelefono" name="r-telefono">
+                    <input class="largedata" type="email" placeholder="email*" id="remail" name="r-email">
+                    <input class="largedata" type="text" placeholder="Calle" id="rcalle" name="r-calle">
+                    <input class="shortdata" type="text" placeholder="Altura*" id="raltura" name="r-altura">
+                    <input class="shortdata" type="text" placeholder="Dpto*" id="rdepto" name="r-dpto">
+                    <input class="shortdata" type="text" placeholder="Piso*" id="rpiso" name="r-piso">
+                    <input class="shortdata" type="text" placeholder="C.P." id="rcp" name="r-cp">
+                    <input class="largedata" type="text" placeholder="barrio" id="rbarrio" name="r-barrio">
+                    <input class="largedata" type="text" placeholder="Localidad" id="rlocalidad" name="r-localidad">
+                    <input class="largedata" type="text" placeholder="Provincia" id="rprovincia" name="r-provincia">
                     <p>Informacion del Paquete</p>
-                    <select name="OS" name="t-sobre">
+                    <select name="OS" name="t-sobre" id="elemento">
                         <option value="sobre">Sobre</option> 
                         <option value="paquete">Paqueteria</option> 
                     </select>
                     <p>Informacion del destinatario</p>
-                    <input class="largedata" type="text" placeholder="Nombre" name="d-nombre">
-                    <input class="largedata" type="text" placeholder="Apellido" name="d-apellido">
-                    <input class="largedata" type="text" placeholder="D.N.I" name="d-dni">
-                    <input class="largedata" type="text" placeholder="Nro de Contacto" name="d-telefono">
-                    <input class="largedata" type="email" placeholder="email" name="d-email">
-                    <input class="largedata" type="text" placeholder="Calle" name="d-calle">
-                    <input class="shortdata" type="text" placeholder="Altura" name="d-altura">
-                    <input class="shortdata" type="text" placeholder="Dpto" name="d-dpto">
-                    <input class="shortdata" type="text" placeholder="Piso" name="d-piso">
-                    <input class="shortdata" type="text" placeholder="Codigo postal" name="d-cp">
-                    <input class="largedata" type="text" placeholder="barrio" name="d-barrio">
-                    <input class="largedata" type="text" placeholder="Localidad" name="d-localidad">
-                    <input class="largedata" type="text" placeholder="Provincia" name="d-provincia">
-                    <input class="largedata" type="text" placeholder="Referencia" name="d-referencia">
+                    <input class="largedata" type="text" placeholder="D.N.I" id="ddni" name="d-dni">
+                    <input class="largedata" type="text" placeholder="Nombre" id="dnombre" name="d-nombre">
+                    <input class="largedata" type="text" placeholder="Apellido" id="dapellido" name="d-apellido">
+                    <input class="largedata" type="text" placeholder="Nro de Contacto" id="dtelefono" name="d-telefono">
+                    <input class="largedata" type="email" placeholder="email" id="demail" name="d-email">
+                    <input class="largedata" type="text" placeholder="Calle" id="dcalle" name="d-calle">
+                    <input class="shortdata" type="text" placeholder="Altura" id="daltura" name="d-altura">
+                    <input class="shortdata" type="text" placeholder="Dpto" id="ddepto" name="d-dpto">
+                    <input class="shortdata" type="text" placeholder="Piso" id="dpiso" name="d-piso">
+                    <input class="shortdata" type="text" placeholder="Codigo postal" id="dcp" name="d-cp">
+                    <input class="largedata" type="text" placeholder="barrio" id="dbarrio" name="d-barrio">
+                    <input class="largedata" type="text" placeholder="Localidad" id="dlocalidad" name="d-localidad">
+                    <input class="largedata" type="text" placeholder="Provincia" id="dprovincia" name="d-provincia">
+                    <input class="largedata" type="text" placeholder="Referencia" id="dreferencia" name="d-referencia">
                     <br>
-                    <input class="largedata" type="submit" value="Siguiente">
+                    <input class="largedata" type="submit" value="Cargar" id="cargar">
                     <input class="largedata" type="submit" value="Volver">
                 </form>
             </div>
-
         </section>
 
         

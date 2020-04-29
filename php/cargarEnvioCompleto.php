@@ -1,162 +1,137 @@
 <?php
-
-/*datos del remitente*/
-$nombre = $_POST["r-nombre"];
-$apellido = $_POST["r-apellido"];
-$dni = $_POST["r-dni"];
-$telefono = $_POST["r-telefono"];
-$email = $_POST["r-email"];
-$calle = $_POST["r-calle"];
-$altura = $_POST["r-altura"];
-$dpto = $_POST["r-dpto"];
-$piso = $_POST["r-piso"];
-$cp = $_POST["r-cp"];
-$barrio = $_POST["r-barrio"];
-$localidad = $_POST["r-localidad"];
-$provincia = $_POST["r-provincia"];
+//datos del remitente
+$nombre = $_POST["rnombre"];
+$apellido = $_POST["rapellido"];
+$dni = $_POST["rdni"];
+$telefono = $_POST["rtelefono"];
+$email = $_POST["remail"];
+$calle = $_POST["rcalle"];
+$altura = $_POST["raltura"];
+$dpto = $_POST["rdepto"];
+$piso = $_POST["rpiso"];
+$cp = $_POST["rcp"];
+$barrio = $_POST["rbarrio"];
+$localidad = $_POST["rlocalidad"];
+$provincia = $_POST["rprovincia"];
+$exist = $_POST["rexist"];
 /*datos del paquete*/
-/*
-$sobre = $_POST["t-sobre"];
+$sobre = $_POST["tipo"];
+$gettimezone = date_default_timezone_set('America/Argentina/Jujuy');
 $fechahora = date("Y-m-d H:i:s");
+$estado = $_POST["estado"];
+$codigop = $_POST["codigop"];
+$identrada = $_POST["identrada"];
+//datos del destinatario
+$nombreD = $_POST["dnombre"];
+$apellidoD = $_POST["dapellido"];
+$dniD = $_POST["ddni"];
+$telefonoD = $_POST["dtelefono"];
+$emailD = $_POST["demail"];
+$calleD = $_POST["dcalle"];
+$alturaD = $_POST["daltura"];
+$dptoD = $_POST["ddepto"];
+$pisoD = $_POST["dpiso"];
+$cpD = $_POST["dcp"];
+$barrioD = $_POST["dbarrio"];
+$localidadD = $_POST["dlocalidad"];
+$provinciaD = $_POST["dprovincia"];
+$referencia = $_POST["drefencia"];
+$existD = $_POST["dexist"];
 
+cargaEnvioCompleto();
 
-echo $nombre;
+function cargaEnvioCompleto(){
 
-
-/*datos del destinatario/
-$nombreD = $_POST["d-nombre"];
-$apellidoD = $_POST["d-apellido"];
-$dniD = $_POST["d-dni"];
-$telefonoD = $_POST["d-telefono"];
-$emailD = $_POST["d-email"];
-$calleD = $_POST["d-calle"];
-$alturaD = $_POST["d-altura"];
-$dptoD = $_POST["d-dpto"];
-$pisoD = $_POST["d-piso"];
-$cpD = $_POST["d-cp"];
-$barrioD = $_POST["d-barrio"];
-$apellidoD = $_POST["d-nombre"];
-$localidadD = $_POST["d-localidad"];
-$provinciaD = $_POST["d-provincia"];
-$referencia = $_POST["d-referencia"];
-
-*/
-
-$conn = new mysqli("127.0.0.1", "root", "", "envios");
-
-
-
-try
-{
-    if ($conn){//verificacion de conexion true
+    include ("estableceConexion.php");
+    
+    if(!$conn){
+        echo "Se ha producido un fallo en la conexion. MENSAJE: " . mysqli_connect_errno($conn);
+    }
+    else{
+        //paso 1 cargar tabla entrada.
+        $sqlInsertEntrada =     "INSERT INTO `entrada`(`fecha_hora`, `id_codigo_paquete`, `id_remitente`, `empleado_legajo`, `destinatario_dni`) 
+                                 VALUES ('" . $GLOBALS['fechahora'] . "','" . $_POST['codigop'] . "'," . $GLOBALS['dni'] . ",0," . $GLOBALS['dniD'] .")";
         
-        echo "Conexion exitosa!";
-        
-        if ($result = mysqli_query($conn, "SELECT `dni` from remitente WHErE dni = $dni")) {
-
-            /* determinar el número de filas del resultado */
-            $row_cnt = mysqli_num_rows($result);
-        
-            printf("El resultado tiene %d filas.\n", $row_cnt);
-        
-            /* cerrar el resulset */
-            mysqli_free_result($result);
-
-            $updateRemitente = "UPDATE `remitente` SET `nombres`='$nombre',`apellidos`='$apellido',`telefono`='$telefono',`email`='$email',`calle`='$calle',`altura`='$altura',`piso`='$piso',
-                                        `depto`='$dpto',`cp`='$cp',`barrio`='$barrio',`localidad`='$localidad',`provincia`='$provincia' WHERE dni = $dni";
-
-            if (mysqli_query($conn, $updateRemitente))  {
-                //header("location:./../operatoria/inicio.html");
-
-                echo "Modificacion de los datos";
-            }
-
-        }else {
-            
-            $sqlremitente = "INSERT INTO `remitente`(`dni`, `nombres`, `apellidos`, `telefono`, `email`, `calle`, `altura`, `piso`, `depto`, `cp`, `barrio`, `localidad`, `provincia`)
-                    VALUES ($dni,'$nombre','$apellido','$telefono','$email','$calle','$altura','$piso','$dpto','$cp','$barrio','$localidad','$provincia')";
-
-                echo $sqlremitente;
-
-                //echo "ESTE ES EL RESUTADO DE LA ISERCION: " . mysqli_query($conn, $sqlremitente);
-                if (mysqli_query($conn, $sqlremitente))  {
-                    //header("location:./../operatoria/inicio.html");
-
-                    echo "Insertamos los datos";
-                }
-
+        echo "---> " . $sqlInsertEntrada;
+        global $id;
+        if (mysqli_query($conn, $sqlInsertEntrada)){
+            echo "se completo la operacion 1 con exito";
+            $ultimoId = mysqli_query($conn, "SELECT MAX(id) AS id FROM entrada");
+            while ($row = mysqli_fetch_assoc($ultimoId)){
+                $id = $row['id'];
+                echo json_encode($row);
+            }   
         }
-        
-        
-        /*if ($resultado  >= 1){
-            
-            echo "Se encontro " . $resultado . " resultado";
+        else{
+            echo "OCURRIO UN ERROR EN EL PASO 1 DE LA OPERCACION.";
+        }
+        //paso 2 cargar tabla remitente si existe se hace un update por si el cliente cambio un dato. Si no existe se carga como nuevo cliente.
+        if ($GLOBALS['exist'] == "true"){
+            $sqlInsertRemintenteEdit =  "UPDATE `remitente` SET `nombres`='" . $GLOBALS['nombre'] ."',`apellidos`='" . $GLOBALS['apellido'] ."',`telefono`='" . $GLOBALS['telefono'] ."',
+                                        `email`='" . $GLOBALS['email'] ."',`calle`='" . $GLOBALS['calle'] ."',`altura`='" . $GLOBALS['altura'] ."',`piso`='" . $GLOBALS['piso'] ."',
+                                        `depto`='" . $GLOBALS['dpto'] ."',`cp`='" . $GLOBALS['cp'] ."',`barrio`='" . $GLOBALS['barrio'] ."',`localidad`='" . $GLOBALS['localidad'] ."',
+                                        `provincia`='" . $GLOBALS['provincia'] ."' WHERE dni = " . $GLOBALS['dni'];
+            if (mysqli_query($conn, $sqlInsertRemintenteEdit)){
+                echo "se completo la operacion 2.1 con exito";            
+            }
+            else{
+                    echo "OCURRIO UN ERROR EN EL PASO 2.1 DE LA OPERCACION.";
+            }
+            echo $sqlInsertRemintenteEdit;
 
-            
-            
-            
+        }else{
+            $sqlInsertRemintente =  "INSERT INTO `remitente`(`dni`, `nombres`, `apellidos`, `telefono`, `email`, `calle`, `altura`, `piso`, `depto`, `cp`, `barrio`, `localidad`, `provincia`)
+                                     VALUES (" . $GLOBALS['dni'] . ",'" . $GLOBALS['nombre'] ."','" . $GLOBALS['apellido'] ."','" . $GLOBALS['telefono'] ."','" . $GLOBALS['email'] ."',
+                                     '" . $GLOBALS['calle'] ."','" . $GLOBALS['altura'] ."','" . $GLOBALS['piso'] ."','" . $GLOBALS['dpto'] ."','" . $GLOBALS['cp'] ."','" . $GLOBALS['barrio'] ."',
+                                     '" . $GLOBALS['localidad'] ."','" . $GLOBALS['provincia'] ."')";
+            echo $sqlInsertRemintente;
+            if (mysqli_query($conn, $sqlInsertRemintente)){
+                echo "se completo la operacion 2.2 con exito";            
+            }
+            else{
+                    echo "OCURRIO UN ERROR EN EL PASO 2.2 DE LA OPERCACION.";
+            }
+            echo $sqlInsertRemintente;
 
-        }*/
-        
+        }//paso 3 cargar tabla remitente si existe se hace un update por si el cliente cambio un dato. Si no existe se carga como nuevo cliente.
+        if ($GLOBALS['existD'] == "true"){
+            $sqlInsertDestinatarioEdit =  "UPDATE `destinatario` SET `nombres`='" . $GLOBALS['nombreD'] ."',`apellidos`='" . $GLOBALS['apellidoD'] ."',`telefono`='" . $GLOBALS['telefonoD'] ."',
+                                        `email`='" . $GLOBALS['emailD'] ."',`calle`='" . $GLOBALS['calleD'] ."',`altura`='" . $GLOBALS['alturaD'] ."',`piso`='" . $GLOBALS['pisoD'] ."',
+                                        `depto`='" . $GLOBALS['dptoD'] ."',`cp`='" . $GLOBALS['cpD'] ."',`barrio`='" . $GLOBALS['barrioD'] ."',`localidad`='" . $GLOBALS['localidadD'] ."',
+                                        `provincia`='" . $GLOBALS['provinciaD'] ."',`referencia`='" . $GLOBALS['referencia'] ."' WHERE dni = " . $GLOBALS['dniD'];
 
-        
+            if (mysqli_query($conn, $sqlInsertDestinatarioEdit)){
+                echo "se completo la operacion 3.1 con exito";            
+            }
+            else{
+                    echo "OCURRIO UN ERROR EN EL PASO 3.1 DE LA OPERCACION.";
+            }
+            echo $sqlInsertDestinatarioEdit;
+
+        }else{
+            $sqlInsertDestinatario =  "INSERT INTO `destinatario`(`dni`, `nombres`, `apellidos`, `telefono`, `email`, `calle`, `altura`, `piso`, `depto`, `cp`, `barrio`, `localidad`, `provincia`,`referencia`)
+                                     VALUES (" . $GLOBALS['dniD'] . ",'" . $GLOBALS['nombreD'] ."','" . $GLOBALS['apellidoD'] ."','" . $GLOBALS['telefonoD'] ."','" . $GLOBALS['emailD'] ."',
+                                     '" . $GLOBALS['calleD'] ."','" . $GLOBALS['alturaD'] ."','" . $GLOBALS['pisoD'] ."','" . $GLOBALS['dptoD'] ."','" . $GLOBALS['cpD'] ."','" . $GLOBALS['barrioD'] ."',
+                                     '" . $GLOBALS['localidadD'] ."','" . $GLOBALS['provinciaD'] ."','" . $GLOBALS['referencia'] ."')";
+            echo $sqlInsertDestinatario;
+            if (mysqli_query($conn, $sqlInsertDestinatario)){
+                echo "se completo la operacion 3.2 con exito";            
+            }
+            else{
+                    echo "OCURRIO UN ERROR EN EL PASO 3.2 DE LA OPERCACION.";
+            }
+        }
+        //paso 4 cargar tabla paquete
+        $sqlInsertPaquete =     "INSERT INTO `paquete` (`tipo_paquete`, `estado`, `codigo_paquete`, `remitente_dni`, `entrada_identrada`, `destinatario_dni`) 
+                                 VALUES ('" . $GLOBALS['sobre'] . "','" . $GLOBALS['estado'] ."','" . $_POST['codigop'] . "'," . $GLOBALS['dni'] . "," . $GLOBALS['id'] . "," . $GLOBALS['dniD'] .")";
+        echo $sqlInsertPaquete;
+        if (mysqli_query($conn, $sqlInsertPaquete)){
+            echo "se completo la operacion 4 con exito";            
+        }
+        else{
+            echo "OCURRIO UN ERROR EN EL PASO 4 DE LA OPERCACION.";
+        }
+        mysqli_close($conn);       
     }
-    else
-    {
-        throw new Exception('Unable to connect');
-    }
 }
-catch(Exception $e)
-{
-    echo $e->getMessage();
-}
-
-
-
-
-
-
-
-/**
-
-if ($conn -> connet_error){
-    
-    die("Connection failed: " . $conn -> connect_error);
-    
-}
-   
-echo "Conexion exitosa!";
-
-$sqlremitente = "INSERT INTO `remitente`(`dni`, `nombres`, `apellidos`, `telefono`, `email`, `calle`, `altura`, `piso`, `depto`, `cp`, `barrio`, `localidad`, `provincia`)
-                    VALUES ($dni,'$nombre','$apellido','$telefono','$email','$calle','$altura','$piso','$dpto','$cp','$barrio','$localidad','$provincia')";
-
-echo $sqlremitente;
-
-if (mysqli_query($conn, $sqlremitente))  {
-    //header("location:./../operatoria/inicio.html");
-}
-
-
-
-
-$sqlpquete = "INSERT INTO `paquete`(`dni_remitente`, `tipo_paquete`, `estado`, `codigo-paquete`,`destinatario_dni`)
-                         VALUES ('$dni','$t-sobre','proceso','AAA000000','$dniD')";
-
-$sqldestinatario = "INSERT INTO `destinatario`(`dni`, `nombres`, `apellidos`, `telefono`, `email`, `calle`, `altura`, `piso`, `depto`, `cp`, `barrio`, `localidad`, `provincia`, `referencia`) 
-                    VALUES ('$dniD','$nombreD','$alturaD','$telefonoD','$emailD','$calleD','$alturaD','$pisoD','$dptoD','$cpD','$barrioD','$localidadD','$provinciaD','$referencia')";
-
-if (mysqli_query($conn, $sqlremitente))  {
-    //header("location:./../operatoria/inicio.html");
-} if (mysqli_query($conn, $sqlpquete))  {
-    //header("location:./../operatoria/inicio.html");
-} if (mysqli_query($conn, $sqldestinatario))  {
-    header("location:./../operatoria/inicio.html");
-} 
-
-else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-}
-*/
-exit(1);
-
 ?>
