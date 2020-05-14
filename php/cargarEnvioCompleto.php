@@ -20,7 +20,6 @@ $gettimezone = date_default_timezone_set('America/Argentina/Jujuy');
 $fechahora = date("Y-m-d H:i:s");
 $estado = $_POST["estado"];
 $codigop = $_POST["codigop"];
-$identrada = $_POST["identrada"];
 //datos del destinatario
 $nombreD = $_POST["dnombre"];
 $apellidoD = $_POST["dapellido"];
@@ -51,15 +50,13 @@ function cargaEnvioCompleto(){
         //paso 1 cargar tabla entrada.
         $sqlInsertEntrada =     "INSERT INTO `entrada`(`fecha_hora`, `id_codigo_paquete`, `id_remitente`, `empleado_legajo`, `destinatario_dni`) 
                                  VALUES ('" . $GLOBALS['fechahora'] . "','" . $_POST['codigop'] . "'," . $GLOBALS['dni'] . ",0," . $GLOBALS['dniD'] .")";
-        
-        echo "---> " . $sqlInsertEntrada;
         global $id;
         if (mysqli_query($conn, $sqlInsertEntrada)){
             echo "se completo la operacion 1 con exito";
             $ultimoId = mysqli_query($conn, "SELECT MAX(id) AS id FROM entrada");
             while ($row = mysqli_fetch_assoc($ultimoId)){
                 $id = $row['id'];
-                echo json_encode($row);
+                //echo json_encode($row);
             }   
         }
         else{
@@ -77,21 +74,21 @@ function cargaEnvioCompleto(){
             else{
                     echo "OCURRIO UN ERROR EN EL PASO 2.1 DE LA OPERCACION.";
             }
-            echo $sqlInsertRemintenteEdit;
+            //echo $sqlInsertRemintenteEdit;
 
         }else{
             $sqlInsertRemintente =  "INSERT INTO `remitente`(`dni`, `nombres`, `apellidos`, `telefono`, `email`, `calle`, `altura`, `piso`, `depto`, `cp`, `barrio`, `localidad`, `provincia`)
                                      VALUES (" . $GLOBALS['dni'] . ",'" . $GLOBALS['nombre'] ."','" . $GLOBALS['apellido'] ."','" . $GLOBALS['telefono'] ."','" . $GLOBALS['email'] ."',
                                      '" . $GLOBALS['calle'] ."','" . $GLOBALS['altura'] ."','" . $GLOBALS['piso'] ."','" . $GLOBALS['dpto'] ."','" . $GLOBALS['cp'] ."','" . $GLOBALS['barrio'] ."',
                                      '" . $GLOBALS['localidad'] ."','" . $GLOBALS['provincia'] ."')";
-            echo $sqlInsertRemintente;
+            //echo $sqlInsertRemintente;
             if (mysqli_query($conn, $sqlInsertRemintente)){
                 echo "se completo la operacion 2.2 con exito";            
             }
             else{
                     echo "OCURRIO UN ERROR EN EL PASO 2.2 DE LA OPERCACION.";
             }
-            echo $sqlInsertRemintente;
+            //echo $sqlInsertRemintente;
 
         }//paso 3 cargar tabla remitente si existe se hace un update por si el cliente cambio un dato. Si no existe se carga como nuevo cliente.
         if ($GLOBALS['existD'] == "true"){
@@ -106,14 +103,14 @@ function cargaEnvioCompleto(){
             else{
                     echo "OCURRIO UN ERROR EN EL PASO 3.1 DE LA OPERCACION.";
             }
-            echo $sqlInsertDestinatarioEdit;
+            //echo $sqlInsertDestinatarioEdit;
 
         }else{
             $sqlInsertDestinatario =  "INSERT INTO `destinatario`(`dni`, `nombres`, `apellidos`, `telefono`, `email`, `calle`, `altura`, `piso`, `depto`, `cp`, `barrio`, `localidad`, `provincia`,`referencia`)
                                      VALUES (" . $GLOBALS['dniD'] . ",'" . $GLOBALS['nombreD'] ."','" . $GLOBALS['apellidoD'] ."','" . $GLOBALS['telefonoD'] ."','" . $GLOBALS['emailD'] ."',
                                      '" . $GLOBALS['calleD'] ."','" . $GLOBALS['alturaD'] ."','" . $GLOBALS['pisoD'] ."','" . $GLOBALS['dptoD'] ."','" . $GLOBALS['cpD'] ."','" . $GLOBALS['barrioD'] ."',
                                      '" . $GLOBALS['localidadD'] ."','" . $GLOBALS['provinciaD'] ."','" . $GLOBALS['referencia'] ."')";
-            echo $sqlInsertDestinatario;
+            //echo $sqlInsertDestinatario;
             if (mysqli_query($conn, $sqlInsertDestinatario)){
                 echo "se completo la operacion 3.2 con exito";            
             }
@@ -124,7 +121,7 @@ function cargaEnvioCompleto(){
         //paso 4 cargar tabla paquete
         $sqlInsertPaquete =     "INSERT INTO `paquete` (`tipo_paquete`, `estado`, `codigo_paquete`, `remitente_dni`, `entrada_identrada`, `destinatario_dni`) 
                                  VALUES ('" . $GLOBALS['sobre'] . "','" . $GLOBALS['estado'] ."','" . $_POST['codigop'] . "'," . $GLOBALS['dni'] . "," . $GLOBALS['id'] . "," . $GLOBALS['dniD'] .")";
-        echo $sqlInsertPaquete;
+        //echo $sqlInsertPaquete;
         if (mysqli_query($conn, $sqlInsertPaquete)){
             echo "se completo la operacion 4 con exito";            
         }

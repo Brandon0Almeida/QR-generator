@@ -4,10 +4,12 @@
         <title>Pantalla principal</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
-        <link rel="shortcut icon" href="../../images/favicon.png" type="image/favicon.png">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="../js/inicio.js"></script>
         <link rel="stylesheet" type="text/css" href="../css/inicio.css">
+        <link rel="shortcut icon" href="../../images/favicon.png" type="image/favicon.png">
+        <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="../qr/qrcode.js"></script>
+        <script src="../js/inicio.js"></script>
+        
     </head>
     <body>
         <header>
@@ -24,100 +26,80 @@
                 </ul>
             </nav>
         </header>
-        <section>
+        <section id="caragaDatos">
             <div class="remitente" id="formenvio">            
-                <form class="F-remitente">
-                    <p>Informacion del remitente</p>
-                    <input class="largedata" type="text" placeholder="D.N.I"   id="rdni" name="r-dni">
-                    <input class="largedata" type="text" placeholder="Nombre" id="rnombre" name="r-nombre">
-                    <input class="largedata" type="text" placeholder="Apellido"id="rapellido" name="r-apellido">
-                    <input class="largedata" type="text" placeholder="Nro de Contacto" id="rtelefono" name="r-telefono">
-                    <input class="largedata" type="email" placeholder="email*" id="remail" name="r-email">
-                    <input class="largedata" type="text" placeholder="Calle" id="rcalle" name="r-calle">
-                    <input class="shortdata" type="text" placeholder="Altura*" id="raltura" name="r-altura">
-                    <input class="shortdata" type="text" placeholder="Dpto*" id="rdepto" name="r-dpto">
-                    <input class="shortdata" type="text" placeholder="Piso*" id="rpiso" name="r-piso">
-                    <input class="shortdata" type="text" placeholder="C.P." id="rcp" name="r-cp">
-                    <input class="largedata" type="text" placeholder="barrio" id="rbarrio" name="r-barrio">
-                    <input class="largedata" type="text" placeholder="Localidad" id="rlocalidad" name="r-localidad">
-                    <input class="largedata" type="text" placeholder="Provincia" id="rprovincia" name="r-provincia">
-                    <p>Informacion del Paquete</p>
-                    <select name="OS" name="t-sobre" id="elemento">
-                        <option value="sobre">Sobre</option> 
-                        <option value="paquete">Paqueteria</option> 
-                    </select>
-                    <p>Informacion del destinatario</p>
-                    <input class="largedata" type="text" placeholder="D.N.I" id="ddni" name="d-dni">
-                    <input class="largedata" type="text" placeholder="Nombre" id="dnombre" name="d-nombre">
-                    <input class="largedata" type="text" placeholder="Apellido" id="dapellido" name="d-apellido">
-                    <input class="largedata" type="text" placeholder="Nro de Contacto" id="dtelefono" name="d-telefono">
-                    <input class="largedata" type="email" placeholder="email" id="demail" name="d-email">
-                    <input class="largedata" type="text" placeholder="Calle" id="dcalle" name="d-calle">
-                    <input class="shortdata" type="text" placeholder="Altura" id="daltura" name="d-altura">
-                    <input class="shortdata" type="text" placeholder="Dpto" id="ddepto" name="d-dpto">
-                    <input class="shortdata" type="text" placeholder="Piso" id="dpiso" name="d-piso">
-                    <input class="shortdata" type="text" placeholder="Codigo postal" id="dcp" name="d-cp">
-                    <input class="largedata" type="text" placeholder="barrio" id="dbarrio" name="d-barrio">
-                    <input class="largedata" type="text" placeholder="Localidad" id="dlocalidad" name="d-localidad">
-                    <input class="largedata" type="text" placeholder="Provincia" id="dprovincia" name="d-provincia">
-                    <input class="largedata" type="text" placeholder="Referencia" id="dreferencia" name="d-referencia">
-                    <br>
-                    <input class="largedata" type="submit" value="Cargar" id="cargar">
-                    <input class="largedata" type="submit" value="Volver">
-                </form>
+                <div class="cajaflex" id="cajaflex">    
+                    <div class="data" id="data">
+                        <form class="F-remitente">
+                            <p>Informacion del remitente</p>
+                            <input class="largedata" type="text" placeholder="D.N.I"   id="rdni" name="r-dni">
+                            <input class="largedata" type="text" placeholder="Nombre" id="rnombre" name="r-nombre">
+                            <input class="largedata" type="text" placeholder="Apellido"id="rapellido" name="r-apellido">
+                            <input class="largedata" type="text" placeholder="Nro de Contacto" id="rtelefono" name="r-telefono">
+                            <input class="largedata" type="email" placeholder="email*" id="remail" name="r-email">
+                            <input class="largedata" type="text" placeholder="Calle" id="rcalle" name="r-calle">
+                            <input class="shortdata" type="text" placeholder="Altura*" id="raltura" name="r-altura">
+                            <input class="shortdata" type="text" placeholder="Dpto*" id="rdepto" name="r-dpto">
+                            <input class="shortdata" type="text" placeholder="Piso*" id="rpiso" name="r-piso">
+                            <input class="shortdata" type="text" placeholder="C.P." id="rcp" name="r-cp">
+                            <input class="largedata" type="text" placeholder="barrio" id="rbarrio" name="r-barrio">
+                            <input class="largedata" type="text" placeholder="Localidad" id="rlocalidad" name="r-localidad">
+                            <input class="largedata" type="text" placeholder="Provincia" id="rprovincia" name="r-provincia">
+                            <p>Informacion del Paquete</p>
+                            <select name="OS" name="t-sobre" id="elemento">
+                                <option value="sobre">Sobre</option> 
+                                <option value="paquete">Paqueteria</option> 
+                            </select>
+                            <p>Informacion del destinatario</p>
+                            <input class="largedata" type="text" placeholder="D.N.I" id="ddni" name="d-dni">
+                            <input class="largedata" type="text" placeholder="Nombre" id="dnombre" name="d-nombre">
+                            <input class="largedata" type="text" placeholder="Apellido" id="dapellido" name="d-apellido">
+                            <input class="largedata" type="text" placeholder="Nro de Contacto" id="dtelefono" name="d-telefono">
+                            <input class="largedata" type="email" placeholder="email" id="demail" name="d-email">
+                            <input class="largedata" type="text" placeholder="Calle" id="dcalle" name="d-calle">
+                            <input class="shortdata" type="text" placeholder="Altura" id="daltura" name="d-altura">
+                            <input class="shortdata" type="text" placeholder="Dpto" id="ddepto" name="d-dpto">
+                            <input class="shortdata" type="text" placeholder="Piso" id="dpiso" name="d-piso">
+                            <input class="shortdata" type="text" placeholder="Codigo postal" id="dcp" name="d-cp">
+                            <input class="largedata" type="text" placeholder="barrio" id="dbarrio" name="d-barrio">
+                            <input class="largedata" type="text" placeholder="Localidad" id="dlocalidad" name="d-localidad">
+                            <input class="largedata" type="text" placeholder="Provincia" id="dprovincia" name="d-provincia">
+                            <input class="largedata" type="text" placeholder="Referencia" id="dreferencia" name="d-referencia">
+                            <br>
+                            <!-- <button id="continuar">Continuar</button>
+                            <input class="largedata" type="submit" value="Cargar" id="cargar">
+                            <input class="largedata" type="submit" value="Volver"> -->
+                        </form>
+                    </div>
+                    <div class="botonera">
+                        <button class="mostrar" id="mostrar">Mostrar</button>
+                        <button class="mostrar" id="mostrar">cerrar</button>
+                    </div>
+                </div>
             </div>
-        </section>
-
-        
-        <!--<form class="paquete">
-            <input id="tipoPaquete" type="text" placeholder="Sobre o paquete?">
-            <input id="recepcionista" type="text" placeholder="Nombre del recepcionista">
-            <input type="submit" value="Siguiente">
-            <input type="submit" value="Volver">
-        </form>
-        <form class="destinatario">
-            <input id="destinatario" type="text" placeholder="Nombre completo del destinatario">
-            <input id="dni" type="text" placeholder="D.N.I">
-            <input id="telefono" type="text" placeholder="Nro de Contacto">
-            <input id="calle" type="text" placeholder="Calle">
-            <input id="altura" type="text" placeholder="Altura">
-            <input id="dpto" type="text" placeholder="Dpto">
-            <input id="piso" type="text" placeholder="Piso">
-            <input id="codigo postal" type="text" placeholder="Codigo postal">
-            <input id="localidad" type="text" placeholder="Localidad">
-            <input id="provincia" type="text" placeholder="Provincia">
-            <input type="submit" value="Siguiente">
-            <input type="submit" value="Volver">
-        </form> 
-
             
+        </section>
+        <!--Modal -->
+        <div class="modalIgresoPaquete" id="modalIgresoPaquete">
+            <div class="flex" id="flex">
+                <div class="contenido-modal" id="contenido-modal">
+                    <div class="headerModal" id="headerModal">
+                        <span class="close" id="close">&times;</span>
+                        <h2>realiza la impresion del ticket QR</h2>
+                    </div>
+                    <div class="flex-body" id="flex-body">
+                        <p>Se genero el siguiente qr</p> 
+                        <div id="codigoQR" class="codigoQR"></div>
+                        <button id="continua">Continuar sin imprimir</button>
+                        <button id="imprimir">imprimir</button>
+                    </div>
+                    <div class="footer" id="footer">formato de foter</div>
+                </div>
+            </div>
+        </div>
         
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <input id="item_txt" type="text" placeholder="Ingresa algún texto" onchange="generador()">
-        <button id="generarCodigo">Generar</button> <a href="#" id="descargarCodigo">Descargar</a>
-        <div id="codigoQR"></div>  
-
-        -->
     </body>
-    <!--
+   <!--  
     <script>
         /*First way to get a value
         value = $("#txt_name").val(); 
@@ -138,7 +120,7 @@
 
         }
     </script>
-    <script>  
+   <script>  
         
         var chars = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
         var nums = [0,1,2,3,4,5,6,7,8,9];

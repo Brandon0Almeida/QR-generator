@@ -14,11 +14,6 @@ header {
   display: none;
 }
 
-lista {
-  display: none;
-}
-
-
 header label {
   display: none;
   width: 30px;
@@ -83,23 +78,15 @@ header label:hover {
   }
 }
 
-
 section {
-
-    display: block;
+    display: none;
+    position: center;
     margin: auto;
-    width: 60%;
+    width: 85%;
+    height: 750px;
     border: 5px solid;
-    height: 70%;
-    padding :90px;
     background-color: rgb(240, 228, 175);
 }
-
-
-
-
-
-
 
 
 /*====================================================================FIN===========================================================================================*/
@@ -111,24 +98,27 @@ section {
     width: 600;
     max-width: 700px;
     height: 550px ;
-    background: #F3F3F3;
+    background: rgb(178, 178, 180);
     padding: 7px;
     margin-top: 33px;
     border: 1px solid rgba(0,0,0,0.2);
-    display: flex;
-  }
-
-.F-remitente {
-    margin: 10px;
-    align-items: center;
+}
+.cajaflex{
+  display: flex;
+  flex-direction: column;
+}
+.data {
+    align-content: center;
     width: 670px;
     max-width: 670pxpx;
     height: 400px ;
-    background: #F3F3F3:
+    background: #F3F3F3;
     border: 1px solid rgba(0,0,0,0.2);
-    
-    
-  }
+}
+
+.botonera{
+
+}
 
 .largedata{
     margin: auto;
@@ -147,8 +137,72 @@ section {
     width: 50px;
 }
 
+/*===================================================MODAL IGRESO PAQUETE===================================================================================*/
+.flex{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
+.modalIgresoPaquete {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  overflow: auto;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  color: white; /*esto es el color de letra*/
+}
 
+.contenido-modal{
+  position: relative;
+  background-color: rgb(82, 81, 81);
+  margin: 0 auto;
+  width: 30%;
+  box-shadow: 0 0 6px 0 rgba(0,0,0,0.52);
+  animation-name: modal;
+  animation-duration: 1s;
+}
+
+@keyframes modal{
+  from {top: -330px; opacity: 0;}
+  to{top: 0; opacity: 1}
+}
+
+.close {
+  color: #fff;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.close:hover {
+  color: rgb(105, 25, 32);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.headerModal, .footer{
+  text-align: center;
+  padding: 8px, 16px;
+  background: cornflowerblue;
+  color: white; 
+}
+.flex-body{
+  margin : 0 auto;
+  text-align: center;
+}
+.codigoQR{
+  margin : 0 auto;
+}
+.flex-body button{
+  padding: 3px 6px;
+  margin: 7px 7px;
+}
 /*=================================================================================================FIN===================================================================================================*/
 
 /*CODIGO QR*/
@@ -176,9 +230,6 @@ section {
     margin-top: 25px;
     border: 2px solid #eee;
   }
-
-
-
 
   /*======================================================================================================================================*/
 

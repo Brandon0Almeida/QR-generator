@@ -1,27 +1,38 @@
-src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js';
-
-function iniciador(){
+function iniciador(){   
     buscarRemitente();
     bucarDestinatario();
     showHideElements();
     ingresoPaquete();
+    salirqr();
 }
 
 function showHideElements(){
-    $('#formenvio').hide();
-    var muestra = false;
+
+    var muestrapanel = false;
+    var muestraModal = false;
     
     $("#ingreso").click(function(){
-        if (muestra == false){
-            $('#formenvio').show();
-            muestra = true;
+        if (muestrapanel == false){
+            $('#caragaDatos').show();
+            muestrapanel = true;
         }else{
-        $('#formenvio').hide();
-        muestra = false;
+        $('#caragaDatos').hide();
+        limpiarFormulario();
+        muestrapanel = false;
+        }
+    });
+
+    $("#myModal").click(function(){     
+        if (muestraModal == false){
+            $('#myModal').show();
+            muestraModal = true;
+        }else{
+        $('#myModal').hide();
+        muestraModal = false;
+        
         }
     });
 }
-var rexist,dexist;
 function buscarRemitente(){
     $("#rdni").change(function(event){
         //event.preventDefault();
@@ -58,7 +69,6 @@ function buscarRemitente(){
         });
     });
 };
-console.log(rexist);
 function bucarDestinatario(){
     $("#ddni").change(function(event){
         //event.preventDefault();
@@ -88,22 +98,45 @@ function bucarDestinatario(){
                 document.getElementById('dlocalidad').value = paylaod.localidad;
                 document.getElementById('dprovincia').value = paylaod.provincia;
                 document.getElementById('dreferencia').value = paylaod.referencia;
-                //$('#rdni').text(respuesta);
             }else{
                 dexist = paylaod.exist;
             }
         });
     });
 };
-console.log(dexist);
+
 function ingresoPaquete(){
-    //elementos Paquetes 
-    var tipo, rdni, estado, codigopp, ddni, identrada; 
+     $("#mostrar").click(function(event){
+        document.getElementById('modalIgresoPaquete').style.display = 'block';
+        console.log('en ingresopaquete');
+        generadorQr();
+     })
+}
+
+function generadorQr(){
+    var data = "Codigo de paquete: AAA0000004"; 
+    var qrCode = new QRCode(document.getElementById('codigoQR'));      
+    
+    if (data !== undefined){
+        console.log(data);
+        qrCode.makeCode(data);
+    }
+}
+
+function salirqr(){
+    $("#close").click(function(event){
+    document.getElementById('modalIgresoPaquete').style.display = 'none';
+    console.log('en funcion salir');
+    });
+    
+}
+
+function ingresoPaaquete(){
+    //elementos Paquetes
+    
+    var tipo, rdni, estado, codigopp, ddni; 
     var rnombre,rapellido,rtelefono,remail,rcalle,raltura,rdepto,rpiso,rcp,rbarrio,rlocalidad,rprovincia;
-    var dnombre,dapellido,dtelefono,demail,dcalle,daltura,ddepto,dpiso,dcp,dbarrio,dlocalidad,dprovincia,drefencia
-    estado = "en deposito";
-    codigopp = "AAA0000000";
-    identrada = "0";
+    var dnombre,dapellido,dtelefono,demail,dcalle,daltura,ddepto,dpiso,dcp,dbarrio,dlocalidad,dprovincia,drefencia;
     $("#cargar").click(function(event){
         event.preventDefault();
         var ejecuta = "igresaPaquete";
@@ -113,10 +146,9 @@ function ingresoPaquete(){
            //elementos Paquetes 
             tipo: $("#elemento").val(), 
             rdni: $("#rdni").val(),
-            estado: "AAA0000000",
+            estado: "EN DEPOSITO",
             codigop: "AAA0000001",
             ddni: $("#ddni").val(),
-            identrada: identrada,
             //elemntos remitentes
             rnombre: $("#rnombre").val(),
             rapellido: $("#rapellido").val(), 
@@ -149,6 +181,7 @@ function ingresoPaquete(){
         },function(respuesta){
             if (respuesta){
                 console.log("Operacion exitosa  --> " + respuesta);
+                //$('.modal').show();
             }else{
                 console.log("No se pudo completar la operacion  -->" + respuesta);
             }
@@ -156,4 +189,16 @@ function ingresoPaquete(){
     });
 }
 
+function limpiarFormulario(){
+
+    //a continuacion limpliamos todos los inputs del apartado remitente
+    document.getElementById("rdni").value = "";document.getElementById("rnombre").value = "";document.getElementById("rapellido").value = "";document.getElementById("rtelefono").value = "";document.getElementById("remail").value = "";document.getElementById("rcalle").value = "";document.getElementById("raltura").value = "";document.getElementById("rdepto").value = "";document.getElementById("rpiso").value = "";document.getElementById("rcp").value = "";document.getElementById("rbarrio").value = "";document.getElementById("rlocalidad").value = "";document.getElementById("rprovincia").value = "";
+    
+    //a continuacion limpliamos todos los inputs del apartado destinatario
+    document.getElementById("ddni").value = "";document.getElementById("dnombre").value = "";document.getElementById("dapellido").value = "";document.getElementById("dtelefono").value = "";document.getElementById("demail").value = "";document.getElementById("dcalle").value = "";document.getElementById("daltura").value = "";document.getElementById("ddepto").value = "";document.getElementById("dpiso").value = "";document.getElementById("dcp").value = "";document.getElementById("dbarrio").value = "";document.getElementById("dlocalidad").value = "";document.getElementById("dprovincia").value = "";document.getElementById("dreferencia").value = "";
+
+}
+
 window.onload=iniciador;
+
+/* Variables */
