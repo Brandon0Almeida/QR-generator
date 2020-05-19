@@ -4,6 +4,7 @@ function iniciador(){
     showHideElements();
     ingresoPaquete();
     salirqr();
+    imprimirElemento();
 }
 
 function showHideElements(){
@@ -68,7 +69,7 @@ function buscarRemitente(){
             }
         });
     });
-};
+}
 function bucarDestinatario(){
     $("#ddni").change(function(event){
         //event.preventDefault();
@@ -103,12 +104,11 @@ function bucarDestinatario(){
             }
         });
     });
-};
+}
 
 function ingresoPaquete(){
      $("#mostrar").click(function(event){
         document.getElementById('modalIgresoPaquete').style.display = 'block';
-        console.log('en ingresopaquete');
         generadorQr();
      })
 }
@@ -118,7 +118,6 @@ function generadorQr(){
     var qrCode = new QRCode(document.getElementById('codigoQR'));      
     
     if (data !== undefined){
-        console.log(data);
         qrCode.makeCode(data);
     }
 }
@@ -126,9 +125,16 @@ function generadorQr(){
 function salirqr(){
     $("#close").click(function(event){
     document.getElementById('modalIgresoPaquete').style.display = 'none';
-    console.log('en funcion salir');
+    limpiamodal();
     });
     
+}
+
+function limpiamodal(){
+    let menu = document.getElementById('codigoQR');
+    while (menu.firstChild) {
+        menu.removeChild(menu.firstChild);
+    }
 }
 
 function ingresoPaaquete(){
@@ -189,6 +195,13 @@ function ingresoPaaquete(){
     });
 }
 
+function imprimirElemento(){
+    $("#imprimir").click(function(){
+        window.print('#toPrint');
+    });
+    
+}
+
 function limpiarFormulario(){
 
     //a continuacion limpliamos todos los inputs del apartado remitente
@@ -200,5 +213,3 @@ function limpiarFormulario(){
 }
 
 window.onload=iniciador;
-
-/* Variables */

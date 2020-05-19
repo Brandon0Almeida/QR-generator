@@ -1,23 +1,25 @@
 <!DOCTYPE html
 	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
-
 <head>
 	<title>Ingreso al sistema</title>
 	<link rel="shortcut icon" href="../../images/favicon.png" type="image/favicon.png">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
-	
+	<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<script src="../js/indice.js"></script>
 </head>
 <body>
 	<div id="container" action="">
-        <form action="php/validar-Loging.php" method="post">
+        <form>
 			<h2>INGRESO AL SISTEMA</h2>
-            <input type="text" placeholder="🔒 Usuario" name="Usuario">
-			<input type="password" placeholder="🔒 Contraseña" name="Contrasena">            
-            <input type="checkbox"><label class="check" for="checkbox">Keep me logged in</label>
-            <input type="submit" value="Login">
+            <input type="text" placeholder="🔒 Usuario" id="user" name="Usuario"  autocomplete="off">
+			<input type="password" placeholder="🔒 Contraseña" id="pass" name="Contrasena">            
+			<div class="error" id="error">Se a producido un error. Por favor comuniquese con soporte tecnico</div>
+			<div class="noAutorizado" id="noAutorizado">El usuario ingresado no existe o es incorrecto</div>
+            <input type="submit" id="login" value="Login">
         </form>       
-    </div>
+	</div>
 </body>
+</html>

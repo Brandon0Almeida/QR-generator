@@ -90,6 +90,18 @@
                     <div class="flex-body" id="flex-body">
                         <p>Se genero el siguiente qr</p> 
                         <div id="codigoQR" class="codigoQR"></div>
+                        <div id="toPrint" class="toPrint">
+                            <div class="hederPrint">hederPrint</div>
+                            <div class="bodyPrint">
+                                <div class="caja1">caja1</div>
+                                <div class="caja2">caja2</div>
+                                <div class="caja3">caja3</div>
+                            </div>
+                            <div class="foterPrint">
+                                <div class="caja4">caja4</div>
+                                <div class="caja5">caja5</div>
+                            </div>
+                        </div>
                         <button id="continua">Continuar sin imprimir</button>
                         <button id="imprimir">imprimir</button>
                     </div>
@@ -99,48 +111,4 @@
         </div>
         
     </body>
-   <!--  
-    <script>
-        /*First way to get a value
-        value = $("#txt_name").val(); 
-
-        Second way to get a value
-        value = $("#txt_name").attr('value');*/
-    
-        var qrData = document.getElementById('item_txt');     /*<--Vamos a obtener los datos desde el id de un input*/
-
-        var qrCode = new QRCode(document.getElementById('codigoQR'));
-        function generador(){
-            
-            var data = qrData.value;
-
-            window.alert(data);
-
-            qrCode.makeCode(data);
-
-        }
-    </script>
-   <script>  
-        
-        var chars = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
-        var nums = [0,1,2,3,4,5,6,7,8,9];
-        
-        function idPaquete (){
-            
-            pst1 = 0;
-            pst2 = 0;
-            pst3 = 0;
-
-            if (nums < 9999999){
-                nums++;
-                var words = chars[pst1] + chars[pst2] + chars[pst3];
-                var code = words + nums;  
-            }
-
-            
-
-        };            
-
-    </script>
--->
     </html>
