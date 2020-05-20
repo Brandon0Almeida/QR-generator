@@ -2,11 +2,10 @@ function iniciador(){
     buscarRemitente();
     bucarDestinatario();
     showHideElements();
-    ingresoPaquete();
+    solicitarTicket();
     salirqr();
     imprimirElemento();
 }
-
 function showHideElements(){
 
     var muestrapanel = false;
@@ -46,12 +45,12 @@ function buscarRemitente(){
             ejecuta: ejecuta
         },
         function(respuesta){
-            console.log(respuesta);
+            //console.log(respuesta);
             var paylaod = JSON.parse(respuesta);
             if(paylaod.exist == true){
                 rexist = paylaod.exist;
-                console.log(rexist);
-                console.log("chequeo de if");
+                //console.log(rexist);
+                //console.log("chequeo de if");
                 document.getElementById('rnombre').value = paylaod.nombres;
                 document.getElementById('rapellido').value = paylaod.apellidos;
                 document.getElementById('rtelefono').value = paylaod.telefono;
@@ -81,11 +80,11 @@ function bucarDestinatario(){
             ejecuta: ejecuta
         },
         function(respuesta){
-            console.log(respuesta);
+            //console.log(respuesta);
             var paylaod = JSON.parse(respuesta);
             if (paylaod.exist == true){
                 dexist = paylaod.exist;
-                console.log(dexist);
+                //console.log(dexist);
                 document.getElementById('dnombre').value = paylaod.nombres;
                 document.getElementById('dapellido').value = paylaod.apellidos;
                 document.getElementById('dtelefono').value = paylaod.telefono;
@@ -105,14 +104,12 @@ function bucarDestinatario(){
         });
     });
 }
-
-function ingresoPaquete(){
+function solicitarTicket(){
      $("#mostrar").click(function(event){
         document.getElementById('modalIgresoPaquete').style.display = 'block';
         generadorQr();
      })
 }
-
 function generadorQr(){
     var data = "Codigo de paquete: AAA0000004"; 
     var qrCode = new QRCode(document.getElementById('codigoQR'));      
@@ -121,7 +118,6 @@ function generadorQr(){
         qrCode.makeCode(data);
     }
 }
-
 function salirqr(){
     $("#close").click(function(event){
     document.getElementById('modalIgresoPaquete').style.display = 'none';
@@ -129,25 +125,22 @@ function salirqr(){
     });
     
 }
-
 function limpiamodal(){
     let menu = document.getElementById('codigoQR');
     while (menu.firstChild) {
         menu.removeChild(menu.firstChild);
     }
 }
-
-function ingresoPaaquete(){
+function ingresarEnvio(){
     //elementos Paquetes
-    
+    //console.log("estamos en ingresarEnvio");
     var tipo, rdni, estado, codigopp, ddni; 
     var rnombre,rapellido,rtelefono,remail,rcalle,raltura,rdepto,rpiso,rcp,rbarrio,rlocalidad,rprovincia;
     var dnombre,dapellido,dtelefono,demail,dcalle,daltura,ddepto,dpiso,dcp,dbarrio,dlocalidad,dprovincia,drefencia;
-    $("#cargar").click(function(event){
-        event.preventDefault();
-        var ejecuta = "igresaPaquete";
-        console.log(rexist + " " + dexist);
-        //pasamos 3 parametros: servidor 
+    event.preventDefault();
+    var ejecuta = "igresaPaquete";
+    //console.log(rexist + " " + dexist);
+    //pasamos 3 parametros: servidor 
         $.post("../php/cargarEnvioCompleto.php", {
            //elementos Paquetes 
             tipo: $("#elemento").val(), 
@@ -186,22 +179,27 @@ function ingresoPaaquete(){
             dexist: dexist
         },function(respuesta){
             if (respuesta){
-                console.log("Operacion exitosa  --> " + respuesta);
+                //console.log("Operacion exitosa  --> " + respuesta);
                 //$('.modal').show();
             }else{
-                console.log("No se pudo completar la operacion  -->" + respuesta);
+                console.log("No se pudo completar la operacion 'ingresarEnvio' -->" + respuesta);
             }
         });
+}
+function imprimirElemento() {
+    $('#imprimir').click(function(event){
+        ingresarEnvio();
+        var printContents = document.getElementById("toPrint").innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+        document.getElementById('modalIgresoPaquete').style.display = 'none';
+        iniciador();
+        limpiamodal();
+       /* limpiarFormulario(); */
     });
 }
-
-function imprimirElemento(){
-    $("#imprimir").click(function(){
-        window.print('#toPrint');
-    });
-    
-}
-
 function limpiarFormulario(){
 
     //a continuacion limpliamos todos los inputs del apartado remitente
@@ -211,5 +209,4 @@ function limpiarFormulario(){
     document.getElementById("ddni").value = "";document.getElementById("dnombre").value = "";document.getElementById("dapellido").value = "";document.getElementById("dtelefono").value = "";document.getElementById("demail").value = "";document.getElementById("dcalle").value = "";document.getElementById("daltura").value = "";document.getElementById("ddepto").value = "";document.getElementById("dpiso").value = "";document.getElementById("dcp").value = "";document.getElementById("dbarrio").value = "";document.getElementById("dlocalidad").value = "";document.getElementById("dprovincia").value = "";document.getElementById("dreferencia").value = "";
 
 }
-
 window.onload=iniciador;

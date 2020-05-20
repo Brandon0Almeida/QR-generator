@@ -235,11 +235,18 @@ section {
 
   /* PAGINA QUE IMPRIMIMOS */
 
-  .toPrint{
-    width:50%;
+  .toPrint1{
+    width:95%;
     height: 15%;
     border: 1px solid rgb(0, 0, 0);
+    padding: 5px;  
+  }
+  .toPrint{
+    width:50%;
+    height: 80%;
+    border: 1px solid rgb(0, 0, 0);
     padding: 10px;
+    align-items: flex-end;
   }
 
   .bodyPrint{
