@@ -104,16 +104,16 @@ function bucarDestinatario(){
         });
     });
 }
+var codPaquete = "AAA0000004";
 function solicitarTicket(){
      $("#mostrar").click(function(event){
         document.getElementById('modalIgresoPaquete').style.display = 'block';
-        generadorQr();
+        var data = "Codigo de paquete: " + codPaquete;
+        generadorQr(data);
      })
 }
-function generadorQr(){
-    var data = "Codigo de paquete: AAA0000004"; 
-    var qrCode = new QRCode(document.getElementById('codigoQR'));      
-    
+function generadorQr(data){
+    var qrCode = new QRCode(document.getElementById('codigoQRM'));      
     if (data !== undefined){
         qrCode.makeCode(data);
     }
@@ -126,14 +126,18 @@ function salirqr(){
     
 }
 function limpiamodal(){
-    let menu = document.getElementById('codigoQR');
+    let menu = document.getElementById('codigoQRM');
+    while (menu.firstChild) {
+        menu.removeChild(menu.firstChild);
+    }
+    menu = document.getElementById('codigoQRS');
     while (menu.firstChild) {
         menu.removeChild(menu.firstChild);
     }
 }
 function ingresarEnvio(){
     //elementos Paquetes
-    //console.log("estamos en ingresarEnvio");
+    console.log("Se ejecuto ingresarEnvio");
     var tipo, rdni, estado, codigopp, ddni; 
     var rnombre,rapellido,rtelefono,remail,rcalle,raltura,rdepto,rpiso,rcp,rbarrio,rlocalidad,rprovincia;
     var dnombre,dapellido,dtelefono,demail,dcalle,daltura,ddepto,dpiso,dcp,dbarrio,dlocalidad,dprovincia,drefencia;
@@ -179,7 +183,7 @@ function ingresarEnvio(){
             dexist: dexist
         },function(respuesta){
             if (respuesta){
-                //console.log("Operacion exitosa  --> " + respuesta);
+                console.log("Operacion exitosa  --> " + respuesta);
                 //$('.modal').show();
             }else{
                 console.log("No se pudo completar la operacion 'ingresarEnvio' -->" + respuesta);
@@ -189,14 +193,40 @@ function ingresarEnvio(){
 function imprimirElemento() {
     $('#imprimir').click(function(event){
         ingresarEnvio();
-        var printContents = document.getElementById("toPrint").innerHTML;
+        var base64dirty = document.getElementsByTagName('img')[1].getAttribute('src');
+        base64Data = base64dirty.replace(/^data:image\/png;base64,/,"");
+        console.log(base64Data);    
+        modelCreator(document.getElementById('dnombre').value + " " + document.getElementById('dapellido').value,
+                    document.getElementById('dcalle').value,
+                    document.getElementById('daltura').value,
+                    document.getElementById('dpiso').value,
+                    document.getElementById('ddepto').value,
+                    document.getElementById('dlocalidad').value,
+                    document.getElementById('dprovincia').value,
+                    document.getElementById('dcp').value,
+                    document.getElementById('dtelefono').value,
+                    document.getElementById('demail').value,
+                    base64Data , codPaquete,
+                    document.getElementById('rnombre').value + " " + document.getElementById('rapellido').value,
+                    document.getElementById('rcalle').value,
+                    document.getElementById('raltura').value,
+                    document.getElementById('rpiso').value,
+                    document.getElementById('rdepto').value,
+                    document.getElementById('rlocalidad').value,
+                    document.getElementById('rprovincia').value,
+                    document.getElementById('rcp').value,
+                    document.getElementById('rtelefono').value,
+                    document.getElementById('remail').value,);       
+        
+        /* ingresarEnvio();
+        var printContents = document.getElementById("toPrint1").innerHTML;
         var originalContents = document.body.innerHTML;
         document.body.innerHTML = printContents;
         window.print();
         document.body.innerHTML = originalContents;
         document.getElementById('modalIgresoPaquete').style.display = 'none';
         iniciador();
-        limpiamodal();
+        limpiamodal(); */
        /* limpiarFormulario(); */
     });
 }

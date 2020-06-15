@@ -1,0 +1,53 @@
+/* PAGINA QUE IMPRIMIMOS */
+
+.toPrint1{
+    width:40%;
+    height: 25%;
+    border: 1px solid rgb(0, 0, 0);
+    padding: 5px;  
+  }
+  .toPrint{
+    display: flex;
+    flex-direction: column;
+    width:45%;
+    height: 10%;
+    border: 2px solid rgb(0, 0, 0);
+    padding: 7px;
+    align-items: flex-end;
+    
+  }
+  
+  .hederPrint{
+    display: flex;
+    width:95%;
+    height: 20%;
+    border: 1px solid rgb(0, 0, 0);
+    padding: 3px;  
+    justify-content: flex-end;
+  }
+  
+
+  .bodyPrint{
+    display: flex;
+    width:95%;
+    height: 50%;
+    padding: 3px;
+    justify-content: flex-end;
+    border: 1px solid rgb(0, 0, 0);
+  }
+  
+  .codigoQR{
+    width:65px;
+    height: 65px;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgb(0,0,0,0.3);
+  }
+  
+  .foterPrint{
+    display: flex;
+    width:95%;
+    height: 10%;
+    padding: 3px;
+    border: 1px solid rgb(0, 0, 0);
+  }
+    
